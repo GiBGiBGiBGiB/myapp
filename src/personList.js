@@ -1,29 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default class PersonList extends React.Component {
-  state = {
-    items: []
-  }
+export default function PersonList() {
+  const [state,setState] = useState({Items:[]})
 
-  componentDidMount() {
+  useEffect(()=>{
     axios.get(`https://c4m0e7vhf4.execute-api.ap-southeast-1.amazonaws.com/items`)
-      .then(res => {
-        const items = res.data;
-        this.setState({ items });
-      })
-  }
+    .then(res => {
+      // console.log(res.data);
+      const items = res.data.Items;
+      setState( items );
+      console.log(state)
+    })
+    .catch((err)=>{console.error(err)})
+    },[]) 
 
-  render() {
     return (
-      <ul>
+      <ul>test
         {
-          this.state.items
-            .map(item =>
-              <li key={item.ID}>{item.LatestGreetingTime}</li>
-            )
+          state.map(item =>(
+              <li>{item.ID};{item.LatestGreetingTime}</li>
+            ))
         }
       </ul>
-    )
+    );
   }
-}
