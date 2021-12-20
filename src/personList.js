@@ -17,11 +17,11 @@ export default function PersonList() {
 
     return (
       <ul>test
-        {/* {
+        {
           state.map(item =>(
               <li>{item.ID};{item.LatestGreetingTime}</li>
             ))
-        } */}
+        }
       </ul>
     );
   }
